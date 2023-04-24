@@ -19,7 +19,7 @@ public class TileManager {
     public TileManager (GamePanel gp){
         this.gp = gp;
         tile = new Tile[10];
-        mapTileNum = new int[gp.maxScreenCol][gp.maxScreenRow];
+        mapTileNum = new int[gp.maxScreenRow][gp.maxScreenCol];
         getTileImage();
         loadMap("/maps/map01.txt");
     }
@@ -29,20 +29,13 @@ public class TileManager {
             InputStream is = getClass().getResourceAsStream(map);
             BufferedReader br = new BufferedReader(new InputStreamReader(is));
 
-            int col = 0;
-            int row = 0;
-
-            while (col < gp.maxScreenCol && row < gp.maxScreenRow){
+            for (int row=0; row < gp.maxScreenRow; row++){
                 String line = br.readLine();
-                while (col < gp.maxScreenCol){
+
+                for (int col=0; col< gp.maxScreenCol; col++){
                     String[] numbers = line.split(" ");
                     int num = Integer.parseInt(numbers[col]);
-                    mapTileNum[col][row] = num;
-                    col++;
-                }
-                if(col == gp.maxScreenCol){
-                    col = 0;
-                    row++;
+                    mapTileNum[row][col] = num;
                 }
             }
             br.close();
@@ -70,25 +63,18 @@ public class TileManager {
     public void draw(Graphics2D g2d){
 //        g2d.drawImage(tile[0].image,0,0,gp.tileSize, gp.tileSize, null);
 
-        int row = 0;
-        int col = 0;
-        int x = 0;
+        int x;
         int y = 0;
-        while (col < gp.maxScreenCol && row < gp.maxScreenRow){
 
-            int tileNum = mapTileNum[col][row];
-            g2d.drawImage(tile[tileNum].image,x,y,gp.tileSize, gp.tileSize, null);
-            col++;
-            x += gp.tileSize;
-
-            if(col == gp.maxScreenCol){
-                col = 0;
-                x = 0;
-                row++;
-                y += gp.tileSize;
+        for (int row = 0; row< gp.maxScreenRow;row++){
+            x = 0;
+            for (int col = 0; col< gp.maxScreenCol;col++){
+                int tileNum = mapTileNum[row][col];
+                g2d.drawImage(tile[tileNum].image,x,y,gp.tileSize, gp.tileSize, null);
+                x += gp.tileSize;
             }
+            y += gp.tileSize;
         }
-
     }
 
 }

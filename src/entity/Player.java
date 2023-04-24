@@ -4,7 +4,6 @@ import main.KeyHandler;
 import main.GamePanel;
 
 import javax.imageio.ImageIO;
-import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -28,7 +27,7 @@ public class Player extends Entity{
     public void setDefaultValues(){
         x = 200;
         y = 100;
-        speed  = 4;
+        speed = 4;
         direction = "down";
     }
 
@@ -76,8 +75,6 @@ public class Player extends Entity{
     }
 
     public void draw(Graphics2D g2d){
-//        g2d.setColor(Color.white);
-//        g2d.fillRect(x, y, gp.tileSize, gp.tileSize);
 
         BufferedImage image = null;
         switch (direction) {
@@ -108,4 +105,7 @@ public class Player extends Entity{
         }
         g2d.drawImage(image,x, y, gp.tileSize, gp.tileSize, null);
     }
+
 }
+
+

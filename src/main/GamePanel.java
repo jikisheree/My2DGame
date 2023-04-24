@@ -84,6 +84,7 @@ public class GamePanel extends JPanel implements Runnable{
 
     @Override
     public void run() {
+
         double drawInterval = 1000000000/FPS;
         double delta = 0;
         long lastTime = System.nanoTime();
@@ -105,16 +106,6 @@ public class GamePanel extends JPanel implements Runnable{
 
     public void update(){
         player.update();
-        // change position
-//        if(keyH.upPressed){
-//            playerX -= playerSpeed;
-//        }else if(keyH.downPressed){
-//            playerY += playerSpeed;
-//        }else if(keyH.leftPressed){
-//            playerY -= playerSpeed;
-//        }else if(keyH.rightPressed){
-//            playerX += playerSpeed;
-//        }
     }
 
     // standard methods to draw things on JPanel
@@ -122,9 +113,6 @@ public class GamePanel extends JPanel implements Runnable{
         super.paintComponent(g);
 
         Graphics2D g2d = (Graphics2D)g;
-//        g2d.setColor(Color.white);
-//        g2d.fillRect(playerX, playerY, tileSize, tileSize);
-//        g2d.dispose(); //
         tm.draw(g2d);
         player.draw(g2d);
         g2d.dispose();
